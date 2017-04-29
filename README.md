@@ -9,32 +9,39 @@ Simply download from the Releases tab or download the current (WIP) source and i
 ## Usage
 
 Add this to your plugin.yml:
-
-    main: com.coalesce.bukkitforclojure.Main
+```yaml
+main: com.coalesce.bukkitforclojure.Main
+```
 And add this to your wrapper.yml:
 
-    clojure: yourns.yourclj
+```yaml
+clojure: yourns.yourclj
+```
 Your main clj file should also include the following method, which gets called before your onEnable if it exists, no matter you use the params or not:
 
-    (defn setData
-      [^Main wrapperMain
-       ^File dataFolder
-       ^FileConfiguration config
-       ^PluginDescriptionFile pdf
-       ^Server server
-       ^Logger logger] ; Will also be in Main/sLogger as a static method.
-       )
+```clojure
+(defn setData
+  [^Main wrapperMain
+   ^File dataFolder
+   ^FileConfiguration config
+   ^PluginDescriptionFile pdf
+   ^Server server
+   ^Logger logger] ; Will also be in Main/sLogger as a static method.
+   )
+```
 
 Standard methods like onEnable and onDisable are also allowed to be used:
 
-    (defn onEnable
-      []
-      (println "o it enabled")
-      )
-    (defn onDisable
-      []
-      (println "o it disabled")
-      )
+```clojure
+(defn onEnable
+  []
+  (println "o it enabled")
+  )
+(defn onDisable
+  []
+  (println "o it disabled")
+  )
+```
 ### Bugs
 
 Currently we have no bugs which we know of as it's not even developed currently.
