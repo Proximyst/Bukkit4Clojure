@@ -35,6 +35,10 @@ Your main clj file should also include the following method, which gets called b
 Standard methods like onEnable and onDisable are also allowed to be used:
 
 ```clojure
+(defn onLoad
+  []
+  (prn "o it loaded")
+  )
 (defn onEnable
   []
   (prn "o it enabled")
