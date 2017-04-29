@@ -34,10 +34,6 @@ public class Main extends JavaPlugin {
     public void onLoad() {
         Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
         instance = this;
-    }
-
-    @Override
-    public void onEnable() {
         logger = getLogger();
         try (InputStream stream = getResource("clojure.yml")) {
             clojureConfig = YamlConfiguration.loadConfiguration(stream);
@@ -57,18 +53,32 @@ public class Main extends JavaPlugin {
             throw new RuntimeException("The clojure plugin couldn't be enabled due to missing setData method.");
         }
         setData.invoke(this, getDataFolder(), getConfig(), getDescription(), getServer(), getLogger());
+        callIfExists("onLoad");
+    }
 
-        IFn onEnable = Clojure.var(mainNs, "onEnable");
-        if (onEnable != null) {
-            onEnable.invoke();
-        }
+    @Override
+    public void onEnable() {
+        callIfExists("onEnable");
     }
 
     @Override
     public void onDisable() {
-        IFn onDisable = Clojure.var(mainNs, "onDisable");
-        if (onDisable != null) {
-            onDisable.invoke();
+        callIfExists("onDisable");
+    }
+
+    private void callIfExists(String name) {
+        callIfExists(mainNs, name);
+    }
+
+    public void callIfExists(String namespace, String name, Object... args) {
+        require.invoke(namespace);
+        IFn method = Clojure.var(namespace, name);
+        if (method != null) {
+            if (args != null && args.length != 0) {
+                method.invoke(args);
+            } else {
+                method.invoke();
+            }
         }
     }
 
