@@ -1,0 +1,7 @@
+name: Bukkit4Clojure
+author: ProjectCoalesce
+version: 0.1.0-SNAPSHOT
+main: com.coalesce.bukkitforclojure.Main
+
+commands:
+  clojure:
