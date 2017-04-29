@@ -8,6 +8,7 @@ Simply download from the Releases tab or download the current (WIP) source and i
 
 ## Usage
 
+##### Loading the plugin
 Add this to your plugin.yml:
 ```yaml
 main: com.coalesce.bukkitforclojure.Main
@@ -30,21 +31,59 @@ Your main clj file should also include the following method, which gets called b
    )
 ```
 
+##### Actual use of plugin
 Standard methods like onEnable and onDisable are also allowed to be used:
 
 ```clojure
 (defn onEnable
   []
-  (println "o it enabled")
+  (prn "o it enabled")
   )
 (defn onDisable
   []
-  (println "o it disabled")
+  (prn "o it disabled")
   )
 ```
+##### Registering events
+To register events you'll first need a method with an event as a param, whether it's type hinted or not:
+```clojure
+(defn playerQuit
+  [^PlayerQuitEvent event]
+  (prn (-> event (.getPlayer) (.getName)) " has quit the server.")
+  )
+```
+
+To now register this, you'll need to do this in the onEnable:
+```clojure
+(defn onEnable
+  []
+  (-> (Main/getInstance) (.registerEvent PlayerQuitEvent (EventPriority/NORMAL) #(playerQuit %)))
+  )
+```
+
+##### Register commands
+To register commands, you'll need a pretty standard onCommand method somewhere, but it will only work for the commands you assign to the specific method:
+```clojure
+(defn clojureCommand
+  [^CommandSender sender
+   ^Command command
+   ^String label
+   #^"[Ljava.lang.String;" args] ; Type hinting String arrays isnt possible, thus this workaround.
+  (prn (-> command (.getName) (.toUpperCase)) " was executed!")
+  )
+```
+And now onto actually registering the command, again in onEnable:
+```clojure
+(defn onEnable
+ []
+ (-> (Main/getInstance) (.registerCommand "pluginYmlName" #(clojureCommand %1 %2 %3 %4)))
+ )
+```
+And register the command like you always would in the plugin.yml.
+All exceptions thrown are catched with no output, thus a nice return statement.
 ### Bugs
 
-Currently we have no bugs which we know of as it's not even developed currently.
+Currently we have no bugs which we know of as it hasn't ever been tested, at least for now.
 
 ## License
 
