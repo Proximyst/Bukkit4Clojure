@@ -2,6 +2,9 @@ package com.coalesce.bukkitforclojure;
 
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -25,6 +28,7 @@ public class Main extends JavaPlugin {
     private final IFn require = Clojure.var("clojure.core", "require");
     private final Map<Class<? extends Event>, Set<IFn>> events = new HashMap<>();
     private final EventExecutor executor = (listener, event) -> fireEvent(event);
+    private final Map<Command, IFn> commands = new HashMap<>();
 
     @Override
     public void onLoad() {
@@ -68,12 +72,12 @@ public class Main extends JavaPlugin {
         }
     }
 
-    public void registerEvent(Class<? extends Event> event, EventPriority priority, IFn method) {
+    public void registerEvent(final Class<? extends Event> event, final EventPriority priority, final IFn method) {
         registerEvent(event, priority, method, false);
     }
 
     @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
-    public void registerEvent(Class<? extends Event> event, EventPriority priority, IFn method, boolean ignoreCancelled) {
+    public void registerEvent(final Class<? extends Event> event, final EventPriority priority, final IFn method, final boolean ignoreCancelled) {
         Set<IFn> methods = events.getOrDefault(event, new HashSet<>());
         methods.add(method);
         events.put(event, methods);
@@ -81,12 +85,33 @@ public class Main extends JavaPlugin {
         }, priority, executor, this, ignoreCancelled);
     }
 
-    private <T extends Event> void fireEvent(T event) {
+    private <T extends Event> void fireEvent(final T event) {
         Set<IFn> methods = events.get(event.getClass());
         if (methods == null) {
             return; // No events have been registered from the plugin, thus no need to fire any.
         }
         methods.forEach(it -> it.invoke(event));
+    }
+
+    public void registerCommand(final String name, final IFn method) {
+        PluginCommand command = getCommand(name);
+        command.setExecutor(this);
+        commands.put(command, method);
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        IFn command = commands.get(cmd);
+        if (command == null) {
+            return true;
+        }
+        try {
+            command.invoke(sender, command, label, args);
+        } catch (Exception ex) {
+            // Due to clojure having no return statement, this will be kind of the statement.
+            // If the developer expects one, use a try-catch block in Clojure.
+        }
+        return true;
     }
 
     public static Logger sLogger() {
