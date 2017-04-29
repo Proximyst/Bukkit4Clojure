@@ -13,7 +13,7 @@ Add this to your plugin.yml:
 ```yaml
 main: com.coalesce.bukkitforclojure.Main
 ```
-And add this to your wrapper.yml:
+And add this to your clojure.yml:
 
 ```yaml
 clojure: yourns.yourclj
