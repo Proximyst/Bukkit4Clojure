@@ -3,5 +3,5 @@ author: Proximyst
 version: 0.1.0-SNAPSHOT
 main: com.proximyst.bukkit4clojure.example.javaplugin
 
-#commands:
-  #clojure:
+commands:
+  clojure:

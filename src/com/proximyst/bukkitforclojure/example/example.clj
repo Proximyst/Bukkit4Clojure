@@ -1,6 +1,6 @@
-(ns ^{:author      "Project Coalesce"
+(ns ^{:author      "Proximyst"
       :description "An example plugin for Bukkit4Clojure"}
-com.coalesce.bukkitforclojure.example.example
+com.proximyst.bukkitforclojure.example.example
   (:gen-class)
   (:import [org.bukkit.plugin PluginDescriptionFile]
            [org.bukkit.configuration.file FileConfiguration]
@@ -39,4 +39,10 @@ com.coalesce.bukkitforclojure.example.example
   (def pdf pdf_)
   (def server server_)
   (def logger logger_)
+  )
+
+(defn -main
+  []
+  (prn "You should try using this as a plugin instead.")
+  (System/exit 0)
   )
