@@ -1,7 +1,7 @@
 name: Bukkit4Clojure
 author: Proximyst
 version: 0.1.0-SNAPSHOT
-main: com.proximyst.bukkit4clojure.example.javaplugin
+main: com.proximyst.bukkit4clojure.Main
 
 commands:
   clojure:

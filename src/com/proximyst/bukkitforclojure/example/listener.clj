@@ -1,5 +1,6 @@
 (ns com.proximyst.bukkitforclojure.example.listener
-  (:gen-class)
+  (:gen-class
+    :main false)
   (:import [org.bukkit.event.player PlayerJoinEvent]
            [org.bukkit Bukkit ChatColor]
            [org.bukkit.entity Player]))

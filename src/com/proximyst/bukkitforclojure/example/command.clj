@@ -1,5 +1,6 @@
 (ns com.proximyst.bukkitforclojure.example.command
-  (:gen-class)
+  (:gen-class
+    :main false)
   (:import [org.bukkit.command CommandSender Command]
            [org.bukkit.entity Player]
            [org.bukkit Sound]))
