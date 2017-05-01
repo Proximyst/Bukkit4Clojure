@@ -1,4 +1,5 @@
-(ns com.coalesce.bukkitforclojure.example.command
+(ns com.proximyst.bukkitforclojure.example.command
+  (:gen-class)
   (:import [org.bukkit.command CommandSender Command]
            [org.bukkit.entity Player]
            [org.bukkit Sound]))
@@ -7,9 +8,9 @@
   [^CommandSender sender
    ^Command command
    ^String label
-   #^"[Ljava.lang.String;" args]
+   args]
   (.sendMessage sender "You successfully ran a command in Clojure.")
-  (if (instance? Player sender)
-    (let [player (cast Player sender)]
-      (.playSound player (.getLocation player) (Sound/BLOCK_NOTE_BASEDRUM) 1.0 1.0)))
+  (when (instance? Player sender)
+    (let [^Player player (cast Player sender)]
+      (.playSound player (.getLocation player) (Sound/BLOCK_NOTE_BASEDRUM) (float 1.0) (float 1.0))))
   )

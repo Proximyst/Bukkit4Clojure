@@ -1,4 +1,5 @@
-(ns com.coalesce.bukkitforclojure.example.listener
+(ns com.proximyst.bukkitforclojure.example.listener
+  (:gen-class)
   (:import [org.bukkit.event.player PlayerJoinEvent]
            [org.bukkit Bukkit ChatColor]
            [org.bukkit.entity Player]))

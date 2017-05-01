@@ -4,12 +4,14 @@ com.coalesce.bukkitforclojure.example.example
   (:gen-class)
   (:import [org.bukkit.plugin PluginDescriptionFile]
            [org.bukkit.configuration.file FileConfiguration]
-           [com.coalesce.bukkitforclojure Main]
+           [com.proximyst.bukkitforclojure Main]
            [java.io File]
            [org.bukkit Server]
            [java.util.logging Logger]
            [org.bukkit.event.player PlayerJoinEvent]
-           [org.bukkit.event EventPriority]))
+           [org.bukkit.event EventPriority])
+  (:use [com.proximyst.bukkitforclojure.example.command :only [clojureCommand]]
+        [com.proximyst.bukkitforclojure.example.listener :only [playerJoinedHandler]]))
 
 (def ^Main wrapperMain)
 (def ^File dataFolder)
@@ -20,8 +22,8 @@ com.coalesce.bukkitforclojure.example.example
 
 (defn onEnable
   []
-  (.registerEvent wrapperMain PlayerJoinEvent (EventPriority/NORMAL) (fn [event] (com.coalesce.bukkitforclojure.example.listener/playerJoinedHandler event)))
-  (.registerCommand wrapperMain "clojure" #(com.coalesce.bukkitforclojure.example.command/clojureCommand %1 %2 %3 %4))
+  (.registerEvent wrapperMain PlayerJoinEvent (EventPriority/NORMAL) (fn [event] (playerJoinedHandler event)))
+  (.registerCommand wrapperMain "clojure" #(clojureCommand %1 %2 %3 %4))
   )
 
 (defn setData

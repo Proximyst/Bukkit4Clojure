@@ -11,7 +11,7 @@ Simply download from the Releases tab or download the current (WIP) source and i
 ##### Loading the plugin
 Add this to your plugin.yml:
 ```yaml
-main: com.coalesce.bukkitforclojure.Main
+main: com.proximyst.bukkitforclojure.Main
 ```
 And add this to your clojure.yml:
 
@@ -57,7 +57,7 @@ To register events you'll first need a method with an event as a param, whether 
   )
 ```
 
-To now register this, you'll need to do this in the onEnable:
+To now register this, you'll need to do this in the onEnable, but remember to call use on it first:
 ```clojure
 (defn onEnable
   []
@@ -72,7 +72,7 @@ To register commands, you'll need a pretty standard onCommand method somewhere, 
   [^CommandSender sender
    ^Command command
    ^String label
-   #^"[Ljava.lang.String;" args] ; Type hinting String arrays isnt possible, thus this workaround.
+   args] ; Type hinting String arrays isnt possible, thus we don't have any type of it, and rather just use it like a collection within clojure.
   (prn (-> command (.getName) (.toUpperCase)) " was executed!")
   )
 ```
@@ -84,16 +84,16 @@ And now onto actually registering the command, again in onEnable:
  )
 ```
 And register the command like you always would in the plugin.yml.
-All exceptions thrown are catched with no output, thus a nice return statement.
+All exceptions thrown are caught with output, unless they're instance of Return.
 ### Bugs
 
-Currently we have no bugs which we know of as it hasn't ever been tested, at least for now.
+Currently no bugs are known.
 
 ## License
 
 MIT License
 
-Copyright (c) 2017 Project Coalesce
+Copyright (c) 2017 Mariell Hoversholm
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

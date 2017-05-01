@@ -1,7 +1,8 @@
-package com.coalesce.bukkitforclojure;
+package com.proximyst.bukkitforclojure;
 
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
@@ -118,8 +120,12 @@ public class Main extends JavaPlugin {
         try {
             command.invoke(sender, command, label, args);
         } catch (Exception ex) {
-            // Due to clojure having no return statement, this will be kind of the statement.
-            // If the developer expects one, use a try-catch block in Clojure.
+            //noinspection ConstantConditions
+            if (ex instanceof Return) {
+                return true;
+            }
+            sender.sendMessage(ChatColor.RED + "An error occurred within the code. Ask an admin about the stacktrace.");
+            getLogger().log(Level.SEVERE, "An error occurred!", ex);
         }
         return true;
     }
@@ -137,6 +143,9 @@ public class Main extends JavaPlugin {
     }
 
     public static Main getInstance() {
+        if (instance == null) {
+            instance = Main.getPlugin(Main.class);
+        }
         return instance;
     }
 }

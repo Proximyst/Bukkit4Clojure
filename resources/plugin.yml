@@ -1,7 +1,7 @@
 name: Bukkit4Clojure
-author: ProjectCoalesce
+author: Proximyst
 version: 0.1.0-SNAPSHOT
-main: com.coalesce.bukkitforclojure.Main
+main: com.proximyst.bukkit4clojure.example.javaplugin
 
-commands:
-  clojure:
+#commands:
+  #clojure:
