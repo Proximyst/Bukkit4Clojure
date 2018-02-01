@@ -41,10 +41,8 @@ In order to get data about the actual `Plugin` instance, use `Main/getInstance` 
 Standard methods like onEnable and onDisable are also allowed to be used:
 
 ```clojure
-(defn onLoad ; Can also be on-load.
-  []
-  (.info (Main/getLogger) "o it loaded")
-  )
+; called on Plugin#onLoad, due to the semantics of Clojure & Java
+(.info (Main/getLogger) "o it loaded")
 (defn onEnable ; Can also be on-enable.
   []
   (.info (Main/getLogger) "o it enabled")

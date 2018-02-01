@@ -55,10 +55,6 @@ public class Main
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    if (!callIfExists("onLoad")) {
-      callIfExists("on-load");
-    }
   }
 
   @Override
