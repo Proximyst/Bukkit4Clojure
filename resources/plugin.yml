@@ -2,6 +2,3 @@ name: Bukkit4Clojure
 author: Proximyst
 version: 0.1.0-SNAPSHOT
 main: com.proximyst.bukkitforclojure.Main
-
-commands:
-  clojure:
