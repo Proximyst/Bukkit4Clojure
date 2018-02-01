@@ -10,7 +10,7 @@ Leiningen and Boot are the main build systems for Clojure, and use Clojars with 
 
 You can add the library by using them, and adding [the following dependency](https://clojars.org/org.clojars.proximyst/bukkit-for-clojure) in the `project.clj` file:
 ```clojure
-  :dependencies [ [org.clojars.proximyst/bukkit-for-clojure "1.0.0"] ]
+  :dependencies [ [org.clojars.proximyst/bukkit-for-clojure "1.0.1"] ]
 ```
 
 ## Usage
