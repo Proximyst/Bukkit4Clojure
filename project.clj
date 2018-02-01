@@ -1,4 +1,4 @@
-(defproject bukkit4clojure "0.2.0-SNAPSHOT"
+(defproject org.clojars.proximyst/bukkit-for-clojure "1.0.0"
   :description "A Clojure wrapper for Bukkit."
   :url "https://github.com/Proximyst/Bukkit4Clojure"
   :license {:name "MIT License"
