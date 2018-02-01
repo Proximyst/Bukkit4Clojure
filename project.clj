@@ -8,6 +8,5 @@
   :java-source-paths ["src"]
   :source-paths ["src"]
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}
-             :provided {:aot :all :dependencies [[org.clojure/clojure "1.8.0"] [org.spigotmc/spigot-api "1.11.2-R0.1-SNAPSHOT"]]}}
+  :profiles {:provided {:aot :all :dependencies [[org.clojure/clojure "1.8.0"] [org.spigotmc/spigot-api "1.11.2-R0.1-SNAPSHOT"]]}}
   )
