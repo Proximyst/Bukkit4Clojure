@@ -4,7 +4,14 @@ This wrapper is for any developer who wishes to develop Bukkit using the LISP-ba
 
 ## Installation
 
-Simply download from the Releases tab or download the current (WIP) source and install that.
+Simply download from the download the current (WIP) source and install that, or use Clojars.
+
+Leiningen and Boot are the main build systems for Clojure, and use Clojars with a Maven backend.
+
+You can add the library by using them, and adding [the following dependency](https://clojars.org/org.clojars.proximyst/bukkit-for-clojure) in the `project.clj` file:
+```clojure
+  :dependencies [ [org.clojars.proximyst/bukkit-for-clojure "1.0.0"] ]
+```
 
 ## Usage
 
