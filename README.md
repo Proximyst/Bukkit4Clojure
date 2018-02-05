@@ -45,11 +45,11 @@ Standard methods like onEnable and onDisable are also allowed to be used:
 (.info (Main/getLogger) "o it loaded")
 (defn onEnable ; Can also be on-enable.
   []
-  (.info (Main/getLogger) "o it enabled")
+  (.info (Main/sLogger) "o it enabled")
   )
 (defn onDisable ; Can also be on-disable.
   []
-  (.info (Main/getLogger) "o it disabled")
+  (.info (Main/sLogger) "o it disabled")
   )
 ```
 ##### Registering events
@@ -57,7 +57,7 @@ To register events you'll first need a method with an event as a param, whether 
 ```clojure
 (defn playerQuit
   [^PlayerQuitEvent event]
-  (.info (Main/getLogger) (str (-> event .getPlayer .getName) " has quit the server."))
+  (.info (Main/sLogger) (str (-> event .getPlayer .getName) " has quit the server."))
   )
 ```
 
@@ -74,7 +74,7 @@ To register commands, you'll need a pretty standard onCommand method somewhere, 
    ^Command command
    ^String label
    & args] ; Type hinting String arrays isnt possible, thus we don't have any type of it, and rather just use it like a collection within clojure.
-  (.info (Main/getLogger) (str (-> command .getName .toUpperCase) " was executed!"))
+  (.info (Main/sLogger) (str (-> command .getName .toUpperCase) " was executed!"))
   )
 ```
 And now onto actually registering the command, again in onEnable:
