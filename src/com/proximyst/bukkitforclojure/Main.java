@@ -30,10 +30,7 @@ public class Main
   private static Main instance;
   private String mainNs;
   private YamlConfiguration clojureConfig;
-  private final IFn require = Clojure.var(
-        "clojure.core",
-        "require"
-  );
+  private IFn require;
   private final Map<Class<? extends Event>, Set<IFn>> events = new HashMap<>();
   private final EventExecutor executor = (listener, event) -> fireEvent(event);
   private final Map<Command, IFn> commands = new HashMap<>();
@@ -41,6 +38,10 @@ public class Main
   @Override
   public void onLoad() {
     Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+    require = Clojure.var(
+          "clojure.core",
+          "require"
+    );
     instance = this;
     logger = getLogger();
     try (InputStream stream = getResource("clojure.yml");
@@ -59,16 +60,12 @@ public class Main
 
   @Override
   public void onEnable() {
-    if (!callIfExists("onEnable")) {
-      callIfExists("on-enable");
-    }
+    callIfExists("onEnable");
   }
 
   @Override
   public void onDisable() {
-    if (!callIfExists("onDisable")) {
-      callIfExists("on-disable");
-    }
+    callIfExists("onDisable");
   }
 
   private boolean callIfExists(String name) {
