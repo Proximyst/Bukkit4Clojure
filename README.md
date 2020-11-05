@@ -2,6 +2,9 @@
 
 This wrapper is for any developer who wishes to develop Bukkit using the LISP-based language Clojure.
 
+NOTE: This project has been adopted by [cpmcdaniel](https://github.com/cpmcdaniel) and future work will
+continue on his fork, [cpmcdaniel/Bukkit4Clojure](https://github.com/cpmcdaniel/Bukkit4Clojure).
+
 ## Installation
 
 Simply download from the download the current (WIP) source and install that, or use Clojars.
